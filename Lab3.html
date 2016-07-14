@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>World Clock</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+  </head>
+  <body onload='timerTick();timerTick2();'> <!-- Javascript clock functions start working as soon as body loads -->
+  	<form align="center" id = "form1">
+  		<label> Enter city name: &nbsp; </label>
+  		<select id="city_name">
+        <option value="New York">New York</option>
+        <option value="London">London</option>
+        <option value="Cairo">Cairo</option>
+        <option value="New Delhi">New Delhi</option>
+        <option value="Beijing">Beijing</option>
+        <option value="Tokyo">Tokyo</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Berlin">Berlin</option>
+        <option value="Sydney">Sydney</option>
+        <option value="Barcelona">Barcelona</option>
+      </select>
+  	</form>
+    <table id='container'>
+      <tr>
+        <td>
+          <svg id='current_clock' viewBox='0 0 100 100' width='200' height='200'>
+            <circle id='surface' cx='50' cy='50' r='45'/>
+            <g id='pointers'> <!-- hands of the local time clock -->
+              <line id='hour_hand' x1='50' y1='50' x2='50' y2='27' />
+              <line id='minute_hand' x1='50' y1='50' x2='50' y2='17' />
+              <line id='second_hand' x1='50' y1='50' x2='50' y2='13' />
+            </g>
+            <g id='numbers'> <!-- numbers on the local time clock -->
+              <text x='43' y='18'>12</text>
+              <text x='85' y='54'>3</text>
+              <text x='47' y='91'>6</text>
+              <text x='9' y='54'>9</text>
+            </g>
+          </svg>
+        </td>
+        <td>
+          <svg id='timezone_clock' viewBox='0 0 100 100' width='200' height='200'>
+            <circle id='surface' cx='50' cy='50' r='45'/>
+            <g id='pointers2'> <!-- hands of the different time zone clock -->
+              <line id='hour_hand2' x1='50' y1='50' x2='50' y2='27' />
+              <line id='minute_hand2' x1='50' y1='50' x2='50' y2='17' />
+              <line id='second_hand2' x1='50' y1='50' x2='50' y2='13' />
+            </g>
+            <g id='numbers2'> <!-- numbers on the different time zone clock -->
+              <text x='43' y='18'>12</text>
+              <text x='85' y='54'>3</text>
+              <text x='47' y='91'>6</text>
+              <text x='9' y='54'>9</text>
+            </g>
+          </svg>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Local Time
+        </td>
+        <td>
+          Time in Specified City
+        </td>
+      </tr>
+    </table>
+
+
+<!-- Javascript starts here! -->
+
+
+<script language="javascript" type="text/javascript">
+      function timerTick() {
+        with (new Date()) {
+          var h, m, s;
+          
+          h = 30 * ((getHours() % 12) + getMinutes() / 60);
+          m = 6 * getMinutes();
+          s = 6 * getSeconds();
+          document.getElementById('hour_hand').setAttribute('transform', 'rotate(' + h + ', 50, 50)');
+          document.getElementById('minute_hand').setAttribute('transform', 'rotate(' + m + ', 50, 50)'); 
+          document.getElementById('second_hand').setAttribute('transform', 'rotate(' + s + ', 50, 50)');
+          
+          setInterval(timerTick, 1000);
+        }
+      }
+     
+      //If conditions are added for each city. I check the value of the city in city_name and change the time according to that
+      //by subtracting or adding the time difference of that time zone to the local time.
+
+      function timerTick2() {
+        with (new Date()) {
+          var h, m, s;
+          document.getElementById('city_name');
+          if (city_name.value == "New York"){
+          h = (30 * ((getHours() % 12) + getMinutes() / 60)) - (30 * ((9 % 12) + getMinutes() / 60));
+          m = 6 * getMinutes();
+          s = 6 * getSeconds();
+        }
+        else if (city_name.value == "London"){
+          h = (30 * ((getHours() % 12) + getMinutes() / 60)) - (30 * ((4 % 12) + getMinutes() / 60));
+          m = 6 * getMinutes();
+          s = 6 * getSeconds();
+        }
+
+        else if (city_name.value == "Cairo"){
+          h = (30 * ((getHours() % 12) + getMinutes() / 60)) - (30 * ((3 % 12) + getMinutes() / 60));
+          m = 6 * getMinutes();
+          s = 6 * getSeconds();
+        }
+
+        else if (city_name.value == "New Delhi"){
+          h = 30 * ((getHours() % 12) + getMinutes() / 60);
+          m = 6 * getMinutes() + (6 * 30);
+          s = 6 * getSeconds();
+        }
+
+        else if (city_name.value == "Beijing"){
+          h = (30 * ((getHours() % 12) + getMinutes() / 60)) + (30 * ((3 % 12) + getMinutes() / 60));
+          m = 6 * getMinutes();
+          s = 6 * getSeconds();
+        }
+
+        else if (city_name.value == "Tokyo"){
+          h = (30 * ((getHours() % 12) + getMinutes() / 60)) + (30 * ((4 % 12) + getMinutes() / 60));
+          m = 6 * getMinutes();
+          s = 6 * getSeconds();
+        }
+
+        else if (city_name.value == "Chennai"){
+          h = 30 * ((getHours() % 12) + getMinutes() / 60);
+          m = 6 * getMinutes() + (6 * 30);
+          s = 6 * getSeconds();
+        }
+
+        else if (city_name.value == "Berlin"){
+          h = (30 * ((getHours() % 12) + getMinutes() / 60)) - (30 * ((3 % 12) + getMinutes() / 60));
+          m = 6 * getMinutes();
+          s = 6 * getSeconds();
+        }
+
+        else if (city_name.value == "Sydney"){
+          h = (30 * ((getHours() % 12) + getMinutes() / 60)) + (30 * ((5 % 12) + getMinutes() / 60));
+          m = 6 * getMinutes();
+          s = 6 * getSeconds();
+        }
+
+        else if (city_name.value == "Barcelona"){
+          h = (30 * ((getHours() % 12) + getMinutes() / 60)) - (30 * ((3 % 12) + getMinutes() / 60));
+          m = 6 * getMinutes();
+          s = 6 * getSeconds();
+        }
+
+          document.getElementById('hour_hand2').setAttribute('transform', 'rotate(' + h + ', 50, 50)');
+          document.getElementById('minute_hand2').setAttribute('transform', 'rotate(' + m + ', 50, 50)'); 
+          document.getElementById('second_hand2').setAttribute('transform', 'rotate(' + s + ', 50, 50)');
+          
+          setInterval(timerTick2, 1000);
+        }
+      }
+    </script> 
+  </body>
+</html>
